@@ -1,9 +1,12 @@
 import { useEffect, useState } from "react";
 import {
     Image,
+    Linking,
     ScrollView,
     StyleSheet,
-    Text
+    Text,
+    TouchableOpacity,
+    View,
 } from "react-native";
 
 export default function RecipeDetailScreen({ route }: any) {
@@ -21,52 +24,93 @@ export default function RecipeDetailScreen({ route }: any) {
 
     if (!recipe) return null;
 
+    const ingredients = [];
+    for (let i = 1; i <= 20; i++) {
+        const ingredient = recipe[`strIngredient${i}`];
+        const measure = recipe[`strMeasure${i}`];
+        if (ingredient) {
+            ingredients.push(`${measure} ${ingredient}`);
+        }
+    }
+
     return (
         <ScrollView style={styles.container}>
-            <Image
-                source={{ uri: recipe.strMealThumb }}
-                style={styles.image}
-            />
+            <Image source={{ uri: recipe.strMealThumb }} style={styles.image} />
 
-            <Text style={styles.title}>{recipe.strMeal}</Text>
-            <Text style={styles.category}>
-                Category: {recipe.strCategory}
-            </Text>
+            <View style={styles.content}>
+                <Text style={styles.title}>{recipe.strMeal}</Text>
 
-            <Text style={styles.heading}>Instructions</Text>
-            <Text style={styles.instructions}>
-                {recipe.strInstructions}
-            </Text>
+                <Text style={styles.category}>{recipe.strCategory}</Text>
+
+                <Text style={styles.section}>Ingredients</Text>
+                {ingredients.map((item, index) => (
+                    <Text key={index} style={styles.listItem}>
+                        • {item}
+                    </Text>
+                ))}
+
+                <Text style={styles.section}>Instructions</Text>
+                <Text style={styles.instructions}>
+                    {recipe.strInstructions}
+                </Text>
+
+                {recipe.strYoutube && (
+                    <TouchableOpacity
+                        style={styles.button}
+                        onPress={() => Linking.openURL(recipe.strYoutube)}
+                    >
+                        <Text style={styles.buttonText}>Watch Video</Text>
+                    </TouchableOpacity>
+                )}
+            </View>
         </ScrollView>
     );
 }
 
 const styles = StyleSheet.create({
     container: {
-        padding: 15,
+        flex: 1,
+        backgroundColor: "#f5f5f5",
     },
     image: {
         width: "100%",
-        height: 220,
-        borderRadius: 10,
+        height: 250,
+    },
+    content: {
+        padding: 15,
     },
     title: {
-        fontSize: 22,
+        fontSize: 24,
         fontWeight: "bold",
-        marginTop: 10,
+        marginBottom: 5,
     },
     category: {
-        fontSize: 16,
-        marginVertical: 5,
+        color: "#FF7043",
+        fontWeight: "bold",
+        marginBottom: 15,
     },
-    heading: {
+    section: {
         fontSize: 18,
         fontWeight: "bold",
         marginTop: 15,
     },
-    instructions: {
-        fontSize: 15,
+    listItem: {
         marginTop: 5,
+        fontSize: 15,
+    },
+    instructions: {
+        marginTop: 8,
         lineHeight: 22,
+    },
+    button: {
+        backgroundColor: "#FF7043",
+        padding: 14,
+        borderRadius: 10,
+        alignItems: "center",
+        marginTop: 20,
+    },
+    buttonText: {
+        color: "#fff",
+        fontWeight: "bold",
     },
 });

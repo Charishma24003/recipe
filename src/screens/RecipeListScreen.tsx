@@ -17,15 +17,16 @@ export default function RecipeListScreen({ route, navigation }: any) {
             `https://www.themealdb.com/api/json/v1/1/filter.php?c=${category}`
         )
             .then((res) => res.json())
-            .then((data) => setRecipes(data.meals))
+            .then((data) => setRecipes(data.meals || []))
             .catch((err) => console.log(err));
     }, []);
 
     return (
-        <View style={{ flex: 1 }}>
+        <View style={styles.container}>
             <FlatList
                 data={recipes}
                 keyExtractor={(item: any) => item.idMeal}
+                contentContainerStyle={{ paddingBottom: 20 }}
                 renderItem={({ item }: any) => (
                     <TouchableOpacity
                         style={styles.card}
@@ -35,8 +36,14 @@ export default function RecipeListScreen({ route, navigation }: any) {
                             })
                         }
                     >
-                        <Image source={{ uri: item.strMealThumb }} style={styles.image} />
-                        <Text style={styles.title}>{item.strMeal}</Text>
+                        <Image
+                            source={{ uri: item.strMealThumb }}
+                            style={styles.image}
+                        />
+
+                        <View style={styles.textBox}>
+                            <Text style={styles.title}>{item.strMeal}</Text>
+                        </View>
                     </TouchableOpacity>
                 )}
             />
@@ -45,23 +52,27 @@ export default function RecipeListScreen({ route, navigation }: any) {
 }
 
 const styles = StyleSheet.create({
+    container: {
+        flex: 1,
+        backgroundColor: "#f5f5f5",
+    },
     card: {
-        margin: 10,
+        margin: 12,
         backgroundColor: "#fff",
-        borderRadius: 10,
-        padding: 10,
-        alignItems: "center",
-        elevation: 2,
+        borderRadius: 14,
+        overflow: "hidden",
+        elevation: 3,
     },
     image: {
-        width: 160,
-        height: 160,
-        borderRadius: 10,
+        width: "100%",
+        height: 180,
+    },
+    textBox: {
+        padding: 12,
     },
     title: {
-        marginTop: 8,
-        fontSize: 16,
+        fontSize: 18,
         fontWeight: "bold",
-        textAlign: "center",
+        color: "#333",
     },
 });

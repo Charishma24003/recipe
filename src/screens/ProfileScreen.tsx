@@ -1,26 +1,29 @@
+import { MaterialIcons } from "@expo/vector-icons";
 import { Image, StyleSheet, Text, View } from "react-native";
 
 export default function ProfileScreen() {
     return (
         <View style={styles.container}>
-            <Image
-                source={{
-                    uri: "https://i.pravatar.cc/150?img=32",
-                }}
-                style={styles.avatar}
-            />
+            <View style={styles.card}>
+                <Image
+                    source={{
+                        uri: "https://i.pravatar.cc/200",
+                    }}
+                    style={styles.avatar}
+                />
 
-            <Text style={styles.name}>Charishma</Text>
-            <Text style={styles.email}>charishma@email.com</Text>
+                <Text style={styles.name}>Aanya Sharma</Text>
+                <Text style={styles.email}>aanya.sharma@email.com</Text>
 
-            <View style={styles.infoBox}>
-                <Text style={styles.label}>Favorite Cuisine</Text>
-                <Text style={styles.value}>Indian</Text>
-            </View>
+                <View style={styles.infoRow}>
+                    <MaterialIcons name="restaurant" size={20} color="#FF7043" />
+                    <Text style={styles.infoText}>Food Enthusiast</Text>
+                </View>
 
-            <View style={styles.infoBox}>
-                <Text style={styles.label}>Cooking Level</Text>
-                <Text style={styles.value}>Beginner</Text>
+                <View style={styles.infoRow}>
+                    <MaterialIcons name="favorite" size={20} color="#FF7043" />
+                    <Text style={styles.infoText}>Loves Desserts</Text>
+                </View>
             </View>
         </View>
     );
@@ -29,13 +32,22 @@ export default function ProfileScreen() {
 const styles = StyleSheet.create({
     container: {
         flex: 1,
+        backgroundColor: "#f5f5f5",
+        justifyContent: "center",
         alignItems: "center",
-        marginTop: 40,
+    },
+    card: {
+        backgroundColor: "#fff",
+        width: "85%",
+        borderRadius: 16,
+        padding: 25,
+        alignItems: "center",
+        elevation: 3,
     },
     avatar: {
-        width: 120,
-        height: 120,
-        borderRadius: 60,
+        width: 100,
+        height: 100,
+        borderRadius: 50,
         marginBottom: 15,
     },
     name: {
@@ -43,22 +55,16 @@ const styles = StyleSheet.create({
         fontWeight: "bold",
     },
     email: {
-        fontSize: 16,
         color: "gray",
-        marginBottom: 20,
+        marginBottom: 15,
     },
-    infoBox: {
-        width: "80%",
-        backgroundColor: "#fff",
-        padding: 15,
-        borderRadius: 10,
-        marginVertical: 8,
-        elevation: 2,
+    infoRow: {
+        flexDirection: "row",
+        alignItems: "center",
+        marginTop: 8,
     },
-    label: {
-        fontWeight: "bold",
-    },
-    value: {
-        marginTop: 4,
+    infoText: {
+        marginLeft: 8,
+        fontSize: 15,
     },
 });

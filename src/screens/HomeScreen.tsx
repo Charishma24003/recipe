@@ -1,23 +1,29 @@
-import { Button, StyleSheet, Text, View } from "react-native";
+import { Image, StyleSheet, Text, TouchableOpacity, View } from "react-native";
 
 export default function HomeScreen({ navigation }: any) {
     return (
         <View style={styles.container}>
-            <Text style={styles.title}>Recipe App</Text>
+            <Text style={styles.heading}>Welcome</Text>
+            <Text style={styles.sub}>Find your favorite recipes</Text>
 
-            <View style={styles.button}>
-                <Button
-                    title="Browse Recipes"
-                    onPress={() => navigation.navigate("Categories")}
-                />
-            </View>
+            <Image
+                source={require("../../assets/images/cheflogo.png")}
+                style={styles.logo}
+            />
 
-            <View style={styles.button}>
-                <Button
-                    title="Profile"
-                    onPress={() => navigation.navigate("Profile")}
-                />
-            </View>
+            <TouchableOpacity
+                style={styles.button}
+                onPress={() => navigation.navigate("Categories")}
+            >
+                <Text style={styles.buttonText}>Browse Recipes</Text>
+            </TouchableOpacity>
+
+            <TouchableOpacity
+                style={styles.button}
+                onPress={() => navigation.navigate("Profile")}
+            >
+                <Text style={styles.buttonText}>Profile</Text>
+            </TouchableOpacity>
         </View>
     );
 }
@@ -25,16 +31,34 @@ export default function HomeScreen({ navigation }: any) {
 const styles = StyleSheet.create({
     container: {
         flex: 1,
+        backgroundColor: "#f5f5f5",
         justifyContent: "center",
         alignItems: "center",
+        padding: 20,
     },
-    title: {
+    heading: {
         fontSize: 26,
         fontWeight: "bold",
+    },
+    sub: {
+        color: "gray",
+        marginBottom: 20,
+    },
+    logo: {
+        width: 140,
+        height: 140,
         marginBottom: 30,
     },
     button: {
-        width: "60%",
-        marginVertical: 10,
+        backgroundColor: "#FF7043",
+        padding: 14,
+        borderRadius: 10,
+        width: "70%",
+        alignItems: "center",
+        marginVertical: 8,
+    },
+    buttonText: {
+        color: "#fff",
+        fontWeight: "bold",
     },
 });

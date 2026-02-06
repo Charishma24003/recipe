@@ -1,19 +1,22 @@
 import { useEffect } from "react";
-import { StyleSheet, Text, View } from "react-native";
+import { Image, StyleSheet, Text, View } from "react-native";
 
 export default function SplashScreen({ navigation }: any) {
     useEffect(() => {
-        const timer = setTimeout(() => {
-            navigation.replace("Home");
+        setTimeout(() => {
+            navigation.replace("Login");
         }, 2000);
-
-        return () => clearTimeout(timer);
-    }, [navigation]); // fixed dependency warning
+    }, []);
 
     return (
         <View style={styles.container}>
+            <Image
+                source={require("../../assets/images/cheflogo.png")}
+                style={styles.logo}
+            />
+
             <Text style={styles.title}>Recipe App</Text>
-            <Text>Loading delicious recipes...</Text>
+            <Text style={styles.subtitle}>Cook something delicious</Text>
         </View>
     );
 }
@@ -21,13 +24,22 @@ export default function SplashScreen({ navigation }: any) {
 const styles = StyleSheet.create({
     container: {
         flex: 1,
+        backgroundColor: "#FF7043",
         justifyContent: "center",
         alignItems: "center",
-        backgroundColor: "#ffffff",
+    },
+    logo: {
+        width: 120,
+        height: 120,
+        marginBottom: 20,
     },
     title: {
         fontSize: 28,
         fontWeight: "bold",
-        marginBottom: 10,
+        color: "#fff",
+    },
+    subtitle: {
+        color: "#fff",
+        marginTop: 5,
     },
 });
