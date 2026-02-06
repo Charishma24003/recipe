@@ -2,7 +2,7 @@
 
 # dependencies
 node_modules/
-
+private.json
 # Expo
 .expo/
 dist/
