@@ -31,6 +31,19 @@ export default function HomeScreen({ navigation }: any) {
                 <Text style={styles.buttonText}>Profile</Text>
             </TouchableOpacity>
 
+            <TouchableOpacity
+                style={[styles.button, styles.logoutButton]}
+                onPress={() =>
+                    navigation.reset({
+                        index: 0,
+                        routes: [{ name: "Login" }],
+                    })
+                }
+            >
+                <Text style={styles.buttonText}>Logout</Text>
+            </TouchableOpacity>
+
+
             <View style={styles.infoContainer}>
                 <MaterialIcons name="restaurant" size={20} color="#FF7043" />
                 <Text style={styles.infoText}>
@@ -56,6 +69,10 @@ const styles = StyleSheet.create({
         height: 180,
         marginBottom: 10,
     },
+    logoutButton: {
+        backgroundColor: "#FF7043",
+    },
+
     heading: {
         fontSize: 32,
         fontWeight: "bold",
