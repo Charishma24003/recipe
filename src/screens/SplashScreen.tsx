@@ -19,7 +19,7 @@ export default function SplashScreen({ navigation }: any) {
             />
 
             <Text style={styles.title}>Spice Tales</Text>
-            <Text style={styles.subtitle}>Cook something delicious</Text>
+            <Text style={styles.subtitle}>Where spices meet stories!</Text>
         </View>
     );
 }
