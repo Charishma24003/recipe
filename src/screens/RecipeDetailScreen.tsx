@@ -20,7 +20,7 @@ export default function RecipeDetailScreen({ route }: any) {
             .then((res) => res.json())
             .then((data) => setRecipe(data.meals[0]))
             .catch((err) => console.log(err));
-    }, []);
+    }, [mealId]);
 
     if (!recipe) return null;
 

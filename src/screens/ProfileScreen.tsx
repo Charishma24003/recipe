@@ -4,26 +4,36 @@ import { Image, StyleSheet, Text, View } from "react-native";
 export default function ProfileScreen() {
     return (
         <View style={styles.container}>
-            <View style={styles.card}>
+
+            <View style={styles.header} />
+
+
+            <View style={styles.profileCard}>
                 <Image
                     source={{
-                        uri: "https://i.pravatar.cc/200",
+                        uri: "https://randomuser.me/api/portraits/women/44.jpg",
                     }}
                     style={styles.avatar}
                 />
 
-                <Text style={styles.name}>Aanya Sharma</Text>
-                <Text style={styles.email}>aanya.sharma@email.com</Text>
+                <Text style={styles.name}>Hezel Rodrigues</Text>
+                <Text style={styles.email}>hezelro@email.com</Text>
+            </View>
 
-                <View style={styles.infoRow}>
-                    <MaterialIcons name="restaurant" size={20} color="#FF7043" />
-                    <Text style={styles.infoText}>Food Enthusiast</Text>
-                </View>
 
-                <View style={styles.infoRow}>
-                    <MaterialIcons name="favorite" size={20} color="#FF7043" />
-                    <Text style={styles.infoText}>Loves Desserts</Text>
-                </View>
+            <View style={styles.card}>
+                <MaterialIcons name="restaurant" size={22} color="#FF7043" />
+                <Text style={styles.cardText}>Food Enthusiast</Text>
+            </View>
+
+            <View style={styles.card}>
+                <MaterialIcons name="favorite" size={22} color="#FF7043" />
+                <Text style={styles.cardText}>Loves Desserts</Text>
+            </View>
+
+            <View style={styles.card}>
+                <MaterialIcons name="menu-book" size={22} color="#FF7043" />
+                <Text style={styles.cardText}>Recipe Explorer</Text>
             </View>
         </View>
     );
@@ -33,38 +43,54 @@ const styles = StyleSheet.create({
     container: {
         flex: 1,
         backgroundColor: "#f5f5f5",
-        justifyContent: "center",
         alignItems: "center",
     },
-    card: {
+
+    header: {
+        backgroundColor: "#FF7043",
+        width: "100%",
+        height: 120,
+    },
+
+    profileCard: {
         backgroundColor: "#fff",
         width: "85%",
-        borderRadius: 16,
-        padding: 25,
         alignItems: "center",
+        padding: 20,
+        borderRadius: 16,
+        marginTop: -40,
         elevation: 3,
     },
+
     avatar: {
         width: 100,
         height: 100,
         borderRadius: 50,
-        marginBottom: 15,
+        marginBottom: 10,
     },
+
     name: {
-        fontSize: 22,
+        fontSize: 20,
         fontWeight: "bold",
     },
+
     email: {
         color: "gray",
-        marginBottom: 15,
     },
-    infoRow: {
+
+    card: {
+        backgroundColor: "#fff",
+        width: "85%",
+        padding: 15,
+        borderRadius: 12,
+        marginTop: 15,
         flexDirection: "row",
         alignItems: "center",
-        marginTop: 8,
+        elevation: 2,
     },
-    infoText: {
-        marginLeft: 8,
-        fontSize: 15,
+
+    cardText: {
+        marginLeft: 10,
+        fontSize: 16,
     },
 });

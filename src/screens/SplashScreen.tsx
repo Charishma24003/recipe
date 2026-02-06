@@ -3,10 +3,13 @@ import { Image, StyleSheet, Text, View } from "react-native";
 
 export default function SplashScreen({ navigation }: any) {
     useEffect(() => {
-        setTimeout(() => {
+        const timer = setTimeout(() => {
             navigation.replace("Login");
         }, 2000);
-    }, []);
+
+        return () => clearTimeout(timer);
+    }, [navigation]);
+
 
     return (
         <View style={styles.container}>
@@ -15,7 +18,7 @@ export default function SplashScreen({ navigation }: any) {
                 style={styles.logo}
             />
 
-            <Text style={styles.title}>Recipe App</Text>
+            <Text style={styles.title}>Spice Tales</Text>
             <Text style={styles.subtitle}>Cook something delicious</Text>
         </View>
     );

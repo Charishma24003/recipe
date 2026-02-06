@@ -1,4 +1,4 @@
-import { useEffect, useState } from "react";
+import { useEffect, useLayoutEffect, useState } from "react";
 import {
     FlatList,
     Image,
@@ -19,12 +19,22 @@ export default function RecipeListScreen({ route, navigation }: any) {
             .then((res) => res.json())
             .then((data) => setRecipes(data.meals || []))
             .catch((err) => console.log(err));
-    }, []);
+
+    },);
+
+    useLayoutEffect(() => {
+        navigation.setOptions({
+            title: `${category} Recipes`,
+        });
+    }, [navigation, category]);
+
+
 
     return (
         <View style={styles.container}>
             <FlatList
                 data={recipes}
+                numColumns={2}
                 keyExtractor={(item: any) => item.idMeal}
                 contentContainerStyle={{ paddingBottom: 20 }}
                 renderItem={({ item }: any) => (
@@ -36,17 +46,14 @@ export default function RecipeListScreen({ route, navigation }: any) {
                             })
                         }
                     >
-                        <Image
-                            source={{ uri: item.strMealThumb }}
-                            style={styles.image}
-                        />
-
-                        <View style={styles.textBox}>
-                            <Text style={styles.title}>{item.strMeal}</Text>
-                        </View>
+                        <Image source={{ uri: item.strMealThumb }} style={styles.image} />
+                        <Text style={styles.title} numberOfLines={2}>
+                            {item.strMeal}
+                        </Text>
                     </TouchableOpacity>
                 )}
             />
+
         </View>
     );
 }
@@ -57,22 +64,25 @@ const styles = StyleSheet.create({
         backgroundColor: "#f5f5f5",
     },
     card: {
-        margin: 12,
+        flex: 1,
+        margin: 10,
         backgroundColor: "#fff",
         borderRadius: 14,
         overflow: "hidden",
         elevation: 3,
+        alignItems: "center",
+        paddingBottom: 10,
     },
     image: {
         width: "100%",
-        height: 180,
-    },
-    textBox: {
-        padding: 12,
+        height: 120,
     },
     title: {
-        fontSize: 18,
+        paddingHorizontal: 8,
+        paddingTop: 8,
         fontWeight: "bold",
-        color: "#333",
+        textAlign: "center",
+        fontSize: 14,
     },
 });
+

@@ -16,7 +16,7 @@ import { Platform } from "react-native";
 
 const Stack = createNativeStackNavigator();
 
-/* Notification handler */
+
 Notifications.setNotificationHandler({
     handleNotification: async () => ({
         shouldShowAlert: true,
@@ -27,7 +27,7 @@ Notifications.setNotificationHandler({
     }),
 });
 
-/* Android notification channel */
+
 if (Platform.OS === "android") {
     Notifications.setNotificationChannelAsync("default", {
         name: "default",
