@@ -3,7 +3,7 @@
 # dependencies
 node_modules/
 private.json
-google-services.json
+
 # Expo
 .expo/
 dist/
